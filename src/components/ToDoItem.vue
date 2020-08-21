@@ -3,8 +3,10 @@
     class="todo-item"
     v-b-hover="hover => isHovered=hover"
   >
-    <b-checkbox size="lg" value="1" />
+    <b-checkbox size="lg" value="1" @change="toggleCompleted" />
+
     <span>{{ todo.name }}</span>
+
     <span
       v-if="isHovered"
       class="todo-item-delete"
@@ -33,8 +35,18 @@ export default {
   },
 
   methods: {
+
+    // delete an item
     removeTodo() {
       this.$store.dispatch('removeTodo', this.todo.id);
+    },
+
+    // toggles item completed status
+    toggleCompleted() {
+      this.$store.dispatch('updateTodo', {
+        ...this.todo,
+        completed: !this.todo.completed
+      });
     }
   }
 }
