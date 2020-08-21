@@ -14,6 +14,7 @@
         size="sm"
         variant="link"
         class="text-muted"
+        @click="removeCompleted"
       >
         Clear completed
       </b-button>
@@ -25,7 +26,9 @@
 <script>
 export default {
   name: 'ToDoControls',
+
   props: {},
+
   computed: {
     todos() {
       return this.$store.getters.getAll;
@@ -35,6 +38,13 @@ export default {
     },
     completedTodosCount() {
       return this.$store.getters.getByCompleted(true).length;
+    }
+  },
+
+  methods: {
+
+    removeCompleted() {
+      this.$store.dispatch('removeCompletedTodos');
     }
   }
 }

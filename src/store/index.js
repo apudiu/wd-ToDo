@@ -42,6 +42,15 @@ export default new Vuex.Store({
       
       const index = state.todos.findIndex(todo => todo.id === payload);
       state.todos.splice(index, 1);
+    },
+  
+    /**
+     * Filter outs provided completed status to-do's
+     * @param state
+     * @param payload
+     */
+    removeByStatus(state, payload) {
+      state.todos = state.todos.filter(todo => todo.completed !== payload);
     }
   },
   
@@ -82,6 +91,10 @@ export default new Vuex.Store({
     
     removeTodo({commit}, todoId) {
       commit('remove', todoId);
+    },
+    
+    removeCompletedTodos({commit}) {
+      commit('removeByStatus', true);
     }
   }
 })
