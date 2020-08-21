@@ -7,8 +7,10 @@ export default new Vuex.Store({
   state: {
     todos: [
       {id: 98, name: 'Have to go for prayer', completed: false},
-      {id: 99, name: 'Do weDeves assignment from 3 PM', completed: false},
-    ]
+      {id: 99, name: 'Do weDevs assignment', completed: false},
+    ],
+    
+    filter: 'all' // allowed: all, active & completed
   },
   
   mutations: {
@@ -51,6 +53,15 @@ export default new Vuex.Store({
      */
     removeByStatus(state, payload) {
       state.todos = state.todos.filter(todo => todo.completed !== payload);
+    },
+  
+    /**
+     * Sets provided filter
+     * @param status
+     * @param payload
+     */
+    setFilter(status, payload) {
+      status.filter = payload;
     }
   },
   
@@ -77,7 +88,26 @@ export default new Vuex.Store({
      * @param state
      * @return Function (Boolean completed)
      */
-    getByCompleted: state => completed => state.todos.filter(todo => todo.completed === completed)
+    getByCompleted: state => completed => state.todos.filter(todo => todo.completed === completed),
+  
+    /**
+     * Get to-do's by filter
+     * @param state
+     * @param getters
+     * @return Array
+     */
+    getFiltered: (state, getters) => {
+      
+      if (state.filter === 'active') {
+        return getters.getByCompleted(false);
+      }
+      
+      if (state.filter === 'completed') {
+        return getters.getByCompleted(true);
+      }
+      
+      return state.todos;
+    }
   },
   
   actions: {
@@ -95,6 +125,10 @@ export default new Vuex.Store({
     
     removeCompletedTodos({commit}) {
       commit('removeByStatus', true);
+    },
+    
+    setTodoFilter({commit}, filter) {
+      commit('setFilter', filter);
     }
   }
 })

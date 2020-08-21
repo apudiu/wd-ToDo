@@ -3,7 +3,10 @@
     class="todo-item"
     v-b-hover="hover => isHovered=hover"
   >
-    <b-checkbox size="lg" value="1" @change="toggleCompleted" />
+    <b-checkbox
+      size="lg"
+      :checked="todo.completed"
+      @change="toggleCompleted" />
 
     <span
       v-if="!editing"
@@ -115,6 +118,7 @@ export default {
 
       &.completed {
         text-decoration: line-through;
+        opacity: .45;
       }
     }
 

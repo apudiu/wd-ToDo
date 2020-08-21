@@ -7,7 +7,7 @@
 
           <ToDoInput />
           <ToDoList />
-          <ToDoControls />
+          <ToDoControls v-if="todoCount" />
 
         </b-card>
 
@@ -24,10 +24,17 @@ import ToDoControls from '../components/ToDoControls';
 
 export default {
   name: 'ToDoPage',
+
   components: {
     ToDoList,
     ToDoInput,
     ToDoControls
+  },
+
+  computed: {
+    todoCount() {
+      return this.$store.getters.getAll.length;
+    }
   }
 }
 </script>

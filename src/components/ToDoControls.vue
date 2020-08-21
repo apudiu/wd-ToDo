@@ -3,9 +3,30 @@
     <b-col>{{ activeTodosCount }} item<span v-if="activeTodosCount > 1">s</span>  left</b-col>
 
     <b-col cols="5" class="filters">
-      <b-button size="sm" variant="outline-secondary">All</b-button>
-      <b-button size="sm" variant="outline-secondary">Active</b-button>
-      <b-button size="sm" variant="outline-primary">Completed</b-button>
+      <b-button
+        size="sm"
+        variant="outline-secondary"
+        :class="{active: filter === 'all'}"
+        @click="setFilter('all')"
+      >
+        All
+      </b-button>
+      <b-button
+        size="sm"
+        variant="outline-secondary"
+        :class="{active: filter === 'active'}"
+        @click="setFilter('active')"
+      >
+        Active
+      </b-button>
+      <b-button
+        size="sm"
+        variant="outline-primary"
+        :class="{active: filter === 'completed'}"
+        @click="setFilter('completed')"
+      >
+        Completed
+      </b-button>
     </b-col>
 
     <b-col>
@@ -27,11 +48,9 @@
 export default {
   name: 'ToDoControls',
 
-  props: {},
-
   computed: {
-    todos() {
-      return this.$store.getters.getAll;
+    filter() {
+      return this.$store.state.filter;
     },
     activeTodosCount() {
       return this.$store.getters.getByCompleted(false).length;
@@ -42,6 +61,10 @@ export default {
   },
 
   methods: {
+
+    setFilter(filter) {
+      this.$store.dispatch('setTodoFilter', filter);
+    },
 
     removeCompleted() {
       this.$store.dispatch('removeCompletedTodos');

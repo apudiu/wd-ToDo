@@ -1,18 +1,13 @@
 <template>
   <div>
 
-    <div
-      class="todo-list"
-      v-if="todos.length">
+    <div class="todo-list">
 
       <ToDoItem
-              v-for="todo in todos"
+              v-for="todo in filteredTodos"
               :todo="todo"
               :key="todo.id" />
 
-    </div>
-    <div v-else>
-      There's no todo!
     </div>
 
   </div>
@@ -28,15 +23,9 @@ export default {
     ToDoItem
   },
 
-  data() {
-    return {
-
-    };
-  },
-
   computed: {
-    todos() {
-      return this.$store.getters.getAll;
+    filteredTodos() {
+      return this.$store.getters.getFiltered;
     }
   }
 }
