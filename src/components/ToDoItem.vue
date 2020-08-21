@@ -5,22 +5,36 @@
   >
     <b-checkbox size="lg" value="1" />
     <span>{{ todo.name }}</span>
-    <span v-if="isHovered" class="todo-item-delete">&times;</span>
+    <span
+      v-if="isHovered"
+      class="todo-item-delete"
+      @click="removeTodo"
+    >
+      &times;
+    </span>
   </div>
 </template>
 
 <script>
 export default {
   name: 'ToDoItem',
+
   props: {
     todo: {
       type: Object,
       required: true
     }
   },
+
   data() {
     return {
       isHovered: false
+    }
+  },
+
+  methods: {
+    removeTodo() {
+      this.$store.dispatch('removeTodo', this.todo.id);
     }
   }
 }

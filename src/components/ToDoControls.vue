@@ -1,6 +1,6 @@
 <template>
   <b-row  class="todo-controls">
-    <b-col>4 items left</b-col>
+    <b-col>{{ activeTodosCount }} item<span v-if="activeTodosCount > 1">s</span>  left</b-col>
 
     <b-col cols="5" class="filters">
       <b-button size="sm" variant="outline-secondary">All</b-button>
@@ -18,7 +18,15 @@
 <script>
 export default {
   name: 'ToDoControls',
-  props: {}
+  props: {},
+  computed: {
+    todos() {
+      return this.$store.getters.getAll;
+    },
+    activeTodosCount() {
+      return this.$store.getters.getByCompleted(false).length;
+    }
+  }
 }
 </script>
 
