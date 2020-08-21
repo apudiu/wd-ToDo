@@ -24,8 +24,6 @@ import ToDoItem from './ToDoItem';
 export default {
   name: 'ToDoList',
 
-  props: {},
-
   components: {
     ToDoItem
   },

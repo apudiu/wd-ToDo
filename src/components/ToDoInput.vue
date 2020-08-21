@@ -3,7 +3,7 @@
     <b-input
       class="todo-input"
       type="text"
-      placeholder="What need to be done?"
+      placeholder="What needs to be done?"
       v-model="todoName"
       @keypress.enter="addItem"
     />
@@ -77,5 +77,6 @@ export default {
   .todo-input {
     margin-bottom: 20px;
     font-size: 20px;
+    font-style: italic;
   }
 </style>

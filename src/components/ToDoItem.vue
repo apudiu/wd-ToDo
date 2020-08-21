@@ -7,6 +7,7 @@
 
     <span
       v-if="!editing"
+      :class="{'completed': todo.completed}"
       @dblclick="enableEditing"
     >
       {{ todoTitle }}
@@ -66,10 +67,6 @@ export default {
 
       // enable editing flag
       this.editing = true;
-
-      // focus the editing element
-
-
     },
 
     // disables editing mode
@@ -115,6 +112,10 @@ export default {
     span {
       font-size: 20px;
       cursor: default;
+
+      &.completed {
+        text-decoration: line-through;
+      }
     }
 
     .todo-input-edit {
