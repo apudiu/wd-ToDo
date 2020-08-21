@@ -12,16 +12,32 @@ export default new Vuex.Store({
   },
   
   mutations: {
+  
+    /**
+     * Add to-do
+     * @param state
+     * @param payload Object  To-do object
+     */
     add(state, payload) {
       state.todos.push(payload);
     },
-    
+  
+    /**
+     * Update a to-do
+     * @param state
+     * @param payload Object  To-do object
+     */
     update(state, payload) {
       
       const index = state.todos.findIndex(todo => todo.id === payload.id);
       state.todos.splice(index, 1, payload);
     },
-    
+  
+    /**
+     * Remove a to-do
+     * @param state
+     * @param payload Int To-do id
+     */
     remove(state, payload) {
       
       const index = state.todos.findIndex(todo => todo.id === payload);

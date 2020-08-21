@@ -23,7 +23,7 @@ import ToDoInput from '../components/ToDoInput';
 import ToDoControls from '../components/ToDoControls';
 
 export default {
-  name: 'ToDo',
+  name: 'ToDoPage',
   components: {
     ToDoList,
     ToDoInput,

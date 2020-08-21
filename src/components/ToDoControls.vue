@@ -4,12 +4,19 @@
 
     <b-col cols="5" class="filters">
       <b-button size="sm" variant="outline-secondary">All</b-button>
-      <b-button size="sm" variant="outline-primary">Active</b-button>
-      <b-button size="sm" variant="outline-success">Completed</b-button>
+      <b-button size="sm" variant="outline-secondary">Active</b-button>
+      <b-button size="sm" variant="outline-primary">Completed</b-button>
     </b-col>
 
     <b-col>
-      <b-button size="sm" variant="link" class="text-muted">Clear completed</b-button>
+      <b-button
+        v-if="completedTodosCount"
+        size="sm"
+        variant="link"
+        class="text-muted"
+      >
+        Clear completed
+      </b-button>
     </b-col>
 
   </b-row>
@@ -25,6 +32,9 @@ export default {
     },
     activeTodosCount() {
       return this.$store.getters.getByCompleted(false).length;
+    },
+    completedTodosCount() {
+      return this.$store.getters.getByCompleted(true).length;
     }
   }
 }

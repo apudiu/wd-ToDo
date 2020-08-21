@@ -5,10 +5,25 @@
   >
     <b-checkbox size="lg" value="1" @change="toggleCompleted" />
 
-    <span>{{ todo.name }}</span>
+    <span
+      v-if="!editing"
+      @dblclick="enableEditing"
+    >
+      {{ todoTitle }}
+    </span>
+
+    <b-input
+      v-else
+      class="todo-input-edit"
+      type="text"
+      v-model="todoTitle"
+      v-focus
+      @keypress.enter="updateTodo"
+      @blur="disableEditing"
+    />
 
     <span
-      v-if="isHovered"
+      v-if="isHovered && !editing"
       class="todo-item-delete"
       @click="removeTodo"
     >
@@ -28,13 +43,52 @@ export default {
     }
   },
 
+  directives: {
+    focus: {
+      inserted: function(el) {
+        el.focus();
+      }
+    }
+  },
+
   data() {
     return {
-      isHovered: false
+      isHovered: false,
+      todoTitle: this.todo.name,
+      editing: false
     }
   },
 
   methods: {
+
+    // prepares editing
+    enableEditing() {
+
+      // enable editing flag
+      this.editing = true;
+
+      // focus the editing element
+
+
+    },
+
+    // disables editing mode
+    disableEditing() {
+      this.editing = false;
+    },
+
+    // update item
+    updateTodo() {
+
+      // update the item
+      this.$store.dispatch('updateTodo', {
+        ...this.todo,
+        name: this.todoTitle
+      });
+
+      // disable editing
+      this.disableEditing();
+    },
 
     // delete an item
     removeTodo() {
@@ -61,6 +115,10 @@ export default {
     span {
       font-size: 20px;
       cursor: default;
+    }
+
+    .todo-input-edit {
+      font-size: 20px;
     }
 
     .todo-item-delete {
