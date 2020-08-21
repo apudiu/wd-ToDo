@@ -6,8 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     todos: [
-      {id: 1, name: 'Have to go for prayer', completed: false},
-      {id: 2, name: 'Do weDeves assignment from 3 PM', completed: false},
+      {id: 98, name: 'Have to go for prayer', completed: false},
+      {id: 99, name: 'Do weDeves assignment from 3 PM', completed: false},
     ]
   },
   
