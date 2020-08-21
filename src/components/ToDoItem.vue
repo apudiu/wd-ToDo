@@ -1,7 +1,11 @@
 <template>
-  <div class="todo-item">
+  <div
+    class="todo-item"
+    v-b-hover="hover => isHovered=hover"
+  >
     <b-checkbox size="lg" value="1" />
     <span>{{ todo.name }}</span>
+    <span v-if="isHovered" class="todo-item-delete">&times;</span>
   </div>
 </template>
 
@@ -12,6 +16,11 @@ export default {
     todo: {
       type: Object,
       required: true
+    }
+  },
+  data() {
+    return {
+      isHovered: false
     }
   }
 }
@@ -25,6 +34,14 @@ export default {
 
     span {
       font-size: 20px;
+      cursor: default;
+    }
+
+    .todo-item-delete {
+      position: absolute;
+      right: 20px;
+      color: darkred;
+      cursor: pointer;
     }
   }
 

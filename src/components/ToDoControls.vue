@@ -9,7 +9,7 @@
     </b-col>
 
     <b-col>
-      <b-button size="sm" variant="link">Clear completed</b-button>
+      <b-button size="sm" variant="link" class="text-muted">Clear completed</b-button>
     </b-col>
 
   </b-row>
