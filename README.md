@@ -1,5 +1,3 @@
-# wedevs_task
-
 ## Project setup
 ```
 npm install
